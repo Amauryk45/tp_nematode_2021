@@ -11,3 +11,4 @@ do
    fastq-dump --split-files --gzip $SRR
 done
 
+
