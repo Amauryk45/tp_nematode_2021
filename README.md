@@ -13,11 +13,12 @@ All the high-throughput sequencing data are deposited in the Gene Expression Omn
 Link : https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA386876&o=acc_s%3Aa&s=SRR5564855,SRR5564856,SRR5564857
 
 Dowloading data 
-script: ~/mydatalocal/tp_nematode_2021/src/download_data.sh
+script: `~/mydatalocal/tp_nematode_2021/src/download_data.sh`
  
 Fastqc and Multiqc analysis 
-script : ~/mydatalocal/tp_nematode_2021/src/quality_data.sh
+script : `~/mydatalocal/tp_nematode_2021/src/quality_data.sh`
 
-
+Filtering and trimming of data
+script: 
 
 
