@@ -6,4 +6,4 @@ mkdir results/fastqc_raw
 mkdir results/multiqc_raw
 
 fastqc -o results/fastqc_raw data/*.fastq.gz
-multiqc -o results/multiqc_raw data/
+multiqc -o results/multiqc_raw results/fastqc_raw
