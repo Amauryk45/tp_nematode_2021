@@ -17,7 +17,7 @@ cd ~/mydatalocal/tp_nematode_2021/data/
 
 for Srr in $Data
 do
-   fastq-dump -X 1000 --split-3 --gzip $Srr
+   fastq-dump --split-3 --gzip $Srr
 done
 
 
