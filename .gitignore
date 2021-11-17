@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 data/
+processed_data
 results/
 *.Rproj
