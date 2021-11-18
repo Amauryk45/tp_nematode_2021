@@ -4,7 +4,7 @@
 Caenorhabditis elegans is a tiny, hermaphrodite nematode with a fixed number of somatic cells (cf. Figure 1). It is widely used as a model organism for fundamental research in a broad range of topics and notably in the study of small RNAs which are often implicated in RNA silencing mechanisms, and consequently have an
 important role in the regulation of gene expression.
 Argonautes proteins are known to interact with a subclass of small RNAs called microRNAs. 
-Here, Brown and colleagues sequenced transcriptome of worms with defective argonautes proteins to study the effect on gene expression. 
+Here, Brown and colleagues sequenced transcriptome of worms with defective argonautes proteins to study the effect of the mutations on gene expression. 
 
 
 **We will reproduce the transcriptomic analysis done by Brown et al. and use a cutting-edge tool developed in the lab (Bulteau and Francesconi (2021)) to assess the impact of developmental variation on the analysis of this dataset.**
