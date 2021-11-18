@@ -6,6 +6,8 @@ cd ~/mydatalocal/tp_nematode_2021/
 mkdir results/fastqc_raw
 mkdir results/multiqc_raw
 mkdir results/trimmed_data
+mkdir data/Celegans_cDNA
+
 
 fastqc -o results/fastqc_raw data/*.fastq.gz
 multiqc -o results/multiqc_raw results/fastqc_raw
