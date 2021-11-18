@@ -16,15 +16,15 @@ cd ~/mydatalocal/tp_nematode_2021/
 for Srr in $Data
  do
 java -jar /softwares/Trimmomatic-0.39/trimmomatic-0.39.jar \
-  PE `#pair-end` \ 
-  data_test/${Srr}_1.fastq.gz \
-  data_test/${Srr}_2.fastq.gz \
+  PE \
+  data/samples_data/${Srr}_1.fastq.gz \
+  data/samples_data/${Srr}_2.fastq.gz \
   results/trimmed_data/${Srr}_1_output_paired.fastq.gz \
   results/trimmed_data/${Srr}_1_output_unpaired.fastq.gz \
   results/trimmed_data/${Srr}_2_output_paired.fastq.gz \
   results/trimmed_data/${Srr}_2_output_unpaired.fastq.gz \
-  -threads 4 \
-  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:5:20 MINLEN:35
+  -threads 3 \
+  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
  done
  
   #both input files in /data_test
