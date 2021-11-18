@@ -5,8 +5,10 @@
 
 
 #Defines variable with all 6 SRR samples (3 WT + 3 alg-5 tm)
-Data="SRR5564855
-SRR5564856
+
+#SRR5564855
+#SRR5564856
+Data="
 SRR5564857
 SRR5564858
 SRR5564859
@@ -17,7 +19,5 @@ cd ~/mydatalocal/tp_nematode_2021/data/
 
 for Srr in $Data
 do
-   fastq-dump --split-3 --gzip $Srr
+   parallel-fastq-dump --split-3 --gzip -s $Srr --threads 6
 done
-
-
