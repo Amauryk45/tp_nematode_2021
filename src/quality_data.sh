@@ -1,8 +1,16 @@
 #! /bin/bash
 
 #This code use fastqc and multiqc functions to give informations on the quality of the data imported
+input_dir=$1
+suffix_out=$2
+
+echo input_dir $input_dir 
+echo suffix_out $suffix_out
 
 cd ~/mydatalocal/tp_nematode_2021/
 
-fastqc -o results/fastqc_raw data/samples_data/*.fastq.gz
-multiqc -o results/multiqc_raw results/fastqc_raw
+mkdir -p results/fastqc_${suffix_out}
+mkdir -p results/multiqc_${suffix_out}
+
+fastqc -o results/fastqc_${suffix_out} ${input_dir}/*.fastq.gz
+multiqc -o results/multiqc_${suffix_out} results/fastqc_${suffix_out}
