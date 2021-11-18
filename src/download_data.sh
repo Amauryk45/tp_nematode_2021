@@ -6,15 +6,8 @@
 
 #Defines variable with all 6 SRR samples (3 WT + 3 alg-5 tm)
 
-#SRR5564855
-#SRR5564856
-#SRR5564857
-#SRR5564858
-Data="SRR5564859
-SRR5564860
-"
-
 cd ~/mydatalocal/tp_nematode_2021/data/
+Data=$(ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq)
 
 for Srr in $Data
 do

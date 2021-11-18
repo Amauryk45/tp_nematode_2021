@@ -2,16 +2,11 @@
 
 #This script uses trimmomatic to filter and trimme RNAseq data from fastq zipped files
 #Variable data with the SRA number of samples
-Data="SRR5564855
-SRR5564856
-SRR5564857
-SRR5564858
-SRR5564859
-SRR5564860
-"
+
 #defines global path
 cd ~/mydatalocal/tp_nematode_2021/
 
+Data=$(ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq)
 
 for Srr in $Data
  do
@@ -27,9 +22,6 @@ java -jar /softwares/Trimmomatic-0.39/trimmomatic-0.39.jar \
   ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
   LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
  done
-
-
-ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq 
 
   #both input files in /data_test
   #four output files (paired/unpaired) in /results/trimmed_data (mkdir)

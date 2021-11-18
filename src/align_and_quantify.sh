@@ -2,14 +2,8 @@
 
 #This code aligns RNAseq data to the C.elegans reference transcirptome using salmon
 
-Data="SRR5564855
-SRR5564856
-SRR5564857
-SRR5564858
-SRR5564859
-SRR5564860
-"
 cd ~/mydatalocal/tp_nematode_2021/
+Data=$(ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq)
 
 #Creation of salmon index of C.elegans transcriptome
 salmon index -t data/Celegans_cDNA/Caenorhabditis_elegans.WBcel235.cdna.all.fa \
