@@ -24,9 +24,13 @@ java -jar /softwares/Trimmomatic-0.39/trimmomatic-0.39.jar \
   results/trimmed_data/${Srr}_2_output_paired.fastq.gz \
   results/trimmed_data/${Srr}_2_output_unpaired.fastq.gz \
   -threads 3 \
-  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
+  LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
  done
- 
+
+
+ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq 
+
   #both input files in /data_test
   #four output files (paired/unpaired) in /results/trimmed_data (mkdir)
   #Illuminaclip: remove adapters in TruSeq3 file (specific for Hiseq)
