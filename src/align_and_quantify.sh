@@ -6,8 +6,8 @@ cd ~/mydatalocal/tp_nematode_2021/
 Data=$(ls data/samples_data/ | sed 's/_[0-9].fastq.gz/ /g'| uniq)
 
 #Creation of salmon index of C.elegans transcriptome
-#salmon index -t data/Celegans_cDNA/Caenorhabditis_elegans.WBcel235.cdna.all.fa \
-#-i results/alignment_data/Caenorhabditis_elegans.WBcel235_idx
+salmon index -t data/Celegans_cDNA/Caenorhabditis_elegans.WBcel235.cdna.all.fa \
+-i results/alignment_data/Caenorhabditis_elegans.WBcel235_idx
 
 
 for Srr in $Data
