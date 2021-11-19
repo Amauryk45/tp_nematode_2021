@@ -1,5 +1,5 @@
 #! /bin/bash
-#This script create required directories
+#This script creates required directories
 
 cd ~/mydatalocal/tp_nematode_2021/
 
