@@ -8,7 +8,7 @@ echo input_dir $input_dir
 echo suffix_out $suffix_out
 
 cd ~/mydatalocal/tp_nematode_2021/
-#Make output directory in results with the choosen suffix
+#Make an output directory in results with the chosen suffix
 mkdir -p results/multiqc_${suffix_out}
-#Give output in this directory, and take in intput a given directory
+#Give the output in this directory, and take in intput a given directory
 multiqc -o results/multiqc_${suffix_out} ${input_dir}

@@ -27,7 +27,7 @@ Link : https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA386876&o=acc_s%3Aa&s=
 
 `git clone https://github.com/Amauryk45/tp_nematode_2021.git`
 
-### Launch master script
+### Launching master script
 
 `~/mydatalocal/tp_nematode_2021/src/master_script.sh`
 
