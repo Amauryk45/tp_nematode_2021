@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#This code use fastqc and multiqc functions to give informations on the quality of the data imported
+#This code uses fastqc and multiqc functions to give informations on the quality of the data imported
 input_dir=$1
 suffix_out=$2
 
