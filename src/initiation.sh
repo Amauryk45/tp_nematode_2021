@@ -1,6 +1,14 @@
 #! /bin/bash
 #This script create required directories
-mkdir results/fastqc_raw
-mkdir results/multiqc_raw
-mkdir results/trimmed_data
-mkdir data/Celegans_cDNA
+
+cd ~/mydatalocal/tp_nematode_2021/
+
+mkdir -p results
+mkdir -p results/trimmed_data
+mkdir -p results/alignment_data
+
+mkdir -p data
+mkdir -p data/Celegans_cDNA
+mkdir -p data/samples_data
+
+
