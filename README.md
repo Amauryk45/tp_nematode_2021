@@ -23,24 +23,27 @@ Link : https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA386876&o=acc_s%3Aa&s=
 
 ## Documentation
 
-### 0. Cloning git hub directory
+### Cloning git hub directory
 
 `git clone https://github.com/Amauryk45/tp_nematode_2021.git`
 
-### 1. Launch master script
+### Launch master script
 
 `~/mydatalocal/tp_nematode_2021/src/master_script.sh`
 
 This script will launch the entire analysis. Steps are detailed below. 
 
-### 2. Prepare utilities
+
+
+
+### 1. Preparing utilities
 
 `~/mydatalocal/tp_nematode_2021/src/initiation.sh`
 
-This script will create the utilities directories that have to be configured and installed
+This script will create the utilities directories that'll be used in the following analysis. 
 
 
-### 3. Importing data 
+### 2. Importing data 
 1. Samples data
 
 `~/mydatalocal/tp_nematode_2021/src/download_data.sh`
@@ -51,7 +54,7 @@ Available at http://ftp.ensembl.org/pub/release-104/fasta/caenorhabditis_elegans
 
 `~/mydatalocal/tp_nematode_2021/src/download_cDNA.sh`
 
-### 4. Quality analysis:  Fastqc and Multiqc 
+### 3. Quality analysis:  Fastqc and Multiqc 
 `~/mydatalocal/tp_nematode_2021/src/quality_data.sh`
 
 The script takes two arguments:
@@ -59,10 +62,10 @@ The script takes two arguments:
 - The input_dir of the files (e.g. "data/samples_data/")
 - The suffixe of the output directories (e.g. "raw")
 
-### 5. Trimming the data
+### 4. Trimming the data
 We will use Trimmomatic version 0.39. More info at http://www.usadellab.org/cms/?page=trimmomatic
 
-Cleaning parameters have been chose according to the results of the quality analysis : 
+Cleaning parameters have been chosen according to the results of the quality analysis : 
 
 - Removal of adaptaters:   ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 
 - LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
@@ -70,13 +73,15 @@ Cleaning parameters have been chose according to the results of the quality anal
 
 `~/mydatalocal/tp_nematode_2021/src/trimming_data.sh`
 
-You can procede to an other quality analysis after trimming the data. 
+The script procedes to an other quality analysis after trimming the data. 
 
-### 6. Transcript quantification
+### 5. Transcript quantification
 Indexation and quantification made with Salmon.
 
 More info at https://salmon.readthedocs.io/en/latest/index.html
 
 `~/mydatalocal/tp_nematode_2021/src/align_and_quantify.sh`
+
+The script procedes to an other quality analysis after mapping. 
 
 
