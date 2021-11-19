@@ -23,9 +23,15 @@ Link : https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA386876&o=acc_s%3Aa&s=
 
 ## Documentation
 
-### 1. Cloning git hub directory
+### 0. Cloning git hub directory
 
 `git clone https://github.com/Amauryk45/tp_nematode_2021.git`
+
+### 1. Launch master script
+
+`~/mydatalocal/tp_nematode_2021/src/master_script.sh`
+
+This script will launch the entire analysis. Steps are detailed below. 
 
 ### 2. Prepare utilities
 
