@@ -84,4 +84,14 @@ More info at https://salmon.readthedocs.io/en/latest/index.html
 
 The script procedes to an other quality analysis after mapping. 
 
+### 6. Differential expression analysis
+We use DSeq2 
+Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biology, 15:550. 10.1186/s13059-014-0550-8
 
+`~/mydatalocal/tp_nematode_2021/src/dseq2_analysis.sh`
+
+Function tximport
+function DSeq2
+
+### 7. Enrichment analyis
+Parameters: p-value < 0.05 & log2 >
