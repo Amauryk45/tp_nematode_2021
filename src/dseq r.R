@@ -20,7 +20,7 @@ head(txi_salmon$counts)
 
 
 
-ColData <- data.frame(paths, rep(c("wt", "alg-5(ram2)"), e=3))
+ColData <- data.frame(paths, rep(c("wt", "alg-5(tm1163) I"), e=3))
 colnames(ColData) <- c("samples", "treatment")
 
 dds <- DESeqDataSetFromMatrix(round(txi_salmon$counts), colData = ColData , design = ~ treatment)
@@ -34,6 +34,15 @@ plotMA(res, ylim = c(-12,12))  #nice plot
 
 plot(res$padj)
 
+### Extract the output table of DESeq ###
+
+pval_threshold = 0.05
+fold_change_threshold = 0.5  #article
+
+#get the indexes of relevant sequences
+ind <- na.omit(rownames(res)[ (res$padj <= pval_threshold) & (res$log2FoldChange > fold_change_threshold) ])
+length(ind)
+cat(ind) 
 
 
 cts=tximport(fullpaths,'salmon',txOut=TRUE)
