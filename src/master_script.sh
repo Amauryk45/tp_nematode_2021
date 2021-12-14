@@ -17,7 +17,7 @@ bash ./src/trimming_data.sh
 echo "Assessing quality of the trimmed data..."
 bash ./src/quality_data.sh results/trimmed_data/ trimmed
 echo "Quantifying the data..."
-bash ./src/align_and_quantiy.sh
+bash ./src/align_and_quantify.sh
 echo "Assessing quality of the quantification..."
 bash ./src/quality_alignment results/alignment_data/quants quant
 
