@@ -69,6 +69,3 @@ cat(differently_regulated_genes_up, sep='\n', file = GOup) #save ind
 
 GOdw = file("~/mydatalocal/tp_nematode_2021/results/genes_of_interest_dw.data", "w")
 cat(differently_regulated_genes_down, sep='\n', file = GOdw) #save ind
-
-
-
