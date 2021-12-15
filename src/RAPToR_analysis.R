@@ -52,9 +52,59 @@ refCompare <- function(samp, ref, ae_obj, fac){
   lm_ref <- lm(t(ovl$ref)~fac)
   return(list(samp=lm_samp, ref=lm_ref, ovl_genelist=ovl$inter.genes))
 }
- results_compare<- refCompare(AbondNormLog, r_larv, ae_abdondance, ColData$treatment)
+comparaison<- refCompare(AbondNormLog, r_larv, ae_abdondance, ColData$treatment)
 
  
- #Coefficients de chaque gène pour la réference, et la différence du sample/wt
-results_compare$samp$coefficients[,2]
-plot(results_compare$samp$coefficients[2,], results_compare$ref$coefficients[2,], xlim = c(-3,3),ylim = c(-3,3))
+ #Coefficients de chaque gène pour la reference, et la différence du sample/wt
+comparaison$samp$coefficients[,2]
+plot(comparaison$ref$coefficients[2,], comparaison$samp$coefficients[2,], xlim = c(-5,5),ylim = c(-5,5))
+
+
+
+
+
+
+
+
+
+
+
+
+#In the comparaison object, the coefficients stand for the intercept (beta_0) intra-samples (not explained by development)
+#and the inter-samples coefficient (beta_1), explaining the percentage of the dvt on the observed effect
+
+lm_de_lm <- lm(comparaison$ref$coefficients[2,] ~ comparaison$samp$coefficients[2,])
+
+plot(x =comparaison$ref$coefficients[2,],
+     y =comparaison$samp$coefficients[2,],
+     xlab = "Reference",
+     ylab = "Sample",
+     xlim = c(-5,5),
+     ylim = c(-5,5)
+)
+abline(lm_de_lm)
+
+
+
+#est-ce que els gènes up ou down régulés sont les gènes corrélés avec le développement ? pas trop 
+cor_comparaison <-cor(comparaison$ref$coefficients[2,],comparaison$samp$coefficients[2,])
+plot(comparaison$ref$coefficients[2,],
+     comparaison$samp$coefficients[2,],
+     main = " Up- and Down- regulated genes correlation with developmental stages ",
+     ylim=c(-3,3),
+     xlim=c(-3,3),
+     xlab = "Reference",
+     ylab = "Sample",
+     col=1,
+    )
+text(2,3,cor_comparaison,col = "darkgreen")
+
+points(comparaison$ref$coefficients[2, comparaison$ovl_genelist %in% differently_regulated_genes_up],
+       comparaison$samp$coefficients[2,comparaison$ovl_genelist %in% differently_regulated_genes_up],col=2)
+points(comparaison$ref$coefficients[2, comparaison$ovl_genelist %in% differently_regulated_genes_down],
+       comparaison$samp$coefficients[2,comparaison$ovl_genelist %in% differently_regulated_genes_down],col=3)
+legend(x = "bottomright", 
+       c("Up-regulated","Down-regulated","other"),
+       pch= 1,
+       col = c(2,3,1000)
+       )
