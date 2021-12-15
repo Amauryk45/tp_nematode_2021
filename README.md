@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 # TP Next Generation Sequencing 2021 - Team RNAseq and modelisation
 
 ## Project presentation
@@ -90,18 +95,29 @@ Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and
 
 `~/mydatalocal/tp_nematode_2021/src/dseq2_analysis.sh`
 
-Function tximport
-function DSeq2
+Differently regulated genes are defined after the following parameters:
+
+- Up-regulated: p-value adjusted < 0,05 and log2 of the FoldChange > 1
+ => 13 genes
+- Down-regulated: p-value adjusted < 0,05 and log2 of the FoldChange < -1
+ => 38 genes
 
 ### 7. Enrichment analyis
-Parameters: p-value < 0.05 & log2 >
+`~/mydatalocal/tp_nematode_2021/src/differential_analysis.R`
+
+Up-regulated genes in the mutants
+![](figs/genes_of_interest_up.png){ width=50% }
+
+Down-regulated genes in the mutants
+![](figs/genes_of_interest_dw.png){ width=50% }
 
 
 ### 8. Evaluating the impact of development using RAPToR
-Estimate of the developmental age of all the samples and plot the results by strain.
-
+Estimation of the developmental age of all the samples and plot the results by strain.
+As the authors used young adult worms, we take the Cel_larv_YA reference transcriptome (from larva to adults)
 
 `~/mydatalocal/tp_nematode_2021/src/RAPToR_analysis.R`
 
 ![](figs/estimated_ages.png)
-• Discuss on the validity of the previous DE analysis
+
+
