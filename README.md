@@ -95,3 +95,13 @@ function DSeq2
 
 ### 7. Enrichment analyis
 Parameters: p-value < 0.05 & log2 >
+
+
+### 8. Evaluating the impact of development using RAPToR
+Estimate of the developmental age of all the samples and plot the results by strain.
+
+
+`~/mydatalocal/tp_nematode_2021/src/RAPToR_analysis.R`
+
+![](figs/estimated_ages.png)
+• Discuss on the validity of the previous DE analysis
