@@ -1,8 +1,8 @@
 #Installation
-BiocManager::install("limma")
-install.packages("pls")
-devtools::install_github("LBMC/RAPToR", build_vignettes = TRUE)
-devtools::install_github("LBMC/wormRef")
+#BiocManager::install("limma")
+#install.packages("pls")
+#devtools::install_github("LBMC/RAPToR", build_vignettes = TRUE)
+#devtools::install_github("LBMC/wormRef")
 
 #Librory import
 library(RAPToR)
@@ -25,28 +25,32 @@ ae_abdondance <- ae(samp = AbondNormLog,                         # input gene ex
                           ref.time_series = r_larv$time.series)
 
 #Plotting
-colors = c("red","blue")
-plot(ae_abdondance, group = ColData$treatment, color=colors[ColData$treatment], show.boot_estimates = T)
+colors = c("blue","red")
+plot(ae_abdondance, group = ColData$treatment, color=colors[ColData$treatment], show.boot_estimates = T, xlim=c(41,46))
 
 
+ae_algram2 <- ae(samp = txi_salmon$lognorm,                  # input gene expression matrix
+                 refdata = r_larv$interpGE,            # reference gene expression matrix
+                 ref.time_series = r_larv$time.series)
+colors <- c("blue", "red")
+plot(ae_algram2, group = ColData$treatment, color = colors[ColData$treatment],show.boot_estimates = TRUE)
 
-par(mfrow=c(2,3))
+par(mfrow=c(1,1))
 plot_cor.ae(ae_abdondance, subset = c(1:6))
 
-
+# Fuunction to get the indices/GExpr of the reference matching sample age estimates.
 getrefTP <- function(ref, ae_obj, ret.idx = T){
-  # function to get the indices/GExpr of the reference matching sample age estimates.
   idx <- sapply(ae_obj$age.estimates[,1], function(t) which.min(abs(ref$time.series - t)))
   if(ret.idx)
     return(idx)
   return(ref$interpGE[,idx])
 }
 
+
 getrefTP(r_larv, ae_abdondance)
 
-
+#Function to compute the reference changes and the observed changes
 refCompare <- function(samp, ref, ae_obj, fac){
-  # function to compute the reference changes and the observed changes
   ovl <- format_to_ref(samp, getrefTP(ref, ae_obj, ret.idx = F))
   lm_samp <- lm(t(ovl$samp)~fac)
   lm_ref <- lm(t(ovl$ref)~fac)
@@ -55,7 +59,7 @@ refCompare <- function(samp, ref, ae_obj, fac){
 comparaison<- refCompare(AbondNormLog, r_larv, ae_abdondance, ColData$treatment)
 
  
- #Coefficients de chaque gène pour la reference, et la différence du sample/wt
+#Plotting each gene coefficient 
 comparaison$samp$coefficients[,2]
 plot(comparaison$ref$coefficients[2,], comparaison$samp$coefficients[2,], xlim = c(-5,5),ylim = c(-5,5))
 
@@ -108,3 +112,21 @@ legend(x = "bottomright",
        pch= 1,
        col = c(2,3,1000)
        )
+
+
+
+
+
+par(pty='s')
+
+
+plot(comparaison$ref$coefficients[2,],comparaison$samp$coefficients[2,],
+     ylim=c(-5,5),xlim=c(-5,5),col=1,pch=16,xlab='log2fold ref',ylab='log2fold sample',main="alg-5(tm1163)")
+
+points(comparaison$ref$coefficients[2, comparaison$ovl_genelist %in% differently_regulated_genes_up],
+       comparaison$samp$coefficients[2,comparaison$ovl_genelist %in% differently_regulated_genes_up],col=3,pch=16)
+points(comparaison$ref$coefficients[2, comparaison$ovl_genelist %in% differently_regulated_genes_down],
+       comparaison$samp$coefficients[2,comparaison$ovl_genelist %in% differently_regulated_genes_down],col=2,pch=16)
+#abline(0,cor(comparaison$ref$coefficients[2,],comparaison$samp$coefficients[2,]),col=4,cex=5)
+legend('bottomright',legend=c("upregulated","downregulated","not significant"),
+       col=c(3,2,1), pch=16, lwd=2, lty=NA,x.intersp = 0.05, bty="n")
