@@ -49,11 +49,11 @@ This script will create the utilities directories that'll be used in the followi
 
 
 ### 2. Importing data 
-1. Samples data
+1. Importing samples data
 
 `~/mydatalocal/tp_nematode_2021/src/download_data.sh`
 
-2. C.elegans reference transcriptome
+2. Importing C.elegans reference transcriptome
 
 Available at http://ftp.ensembl.org/pub/release-104/fasta/caenorhabditis_elegans/cdna/
 
@@ -65,59 +65,90 @@ Available at http://ftp.ensembl.org/pub/release-104/fasta/caenorhabditis_elegans
 The script takes two arguments:
 
 - The input_dir of the files (e.g. "data/samples_data/")
-- The suffixe of the output directories (e.g. "raw")
+- The suffix of the output directories (e.g. "raw").
+
+It starts a set of analysis to check the quality of the data, including: 
+- Basic statistics
+- Per base sequence quality
+- Per sequence quality score
+- Per base sequence content
+- Per base GC content
+- Per sequence GC content
+- Per base N content
+- Sequence length distribution
+- Sequence duplication level
+- Overrepresented sequences
+- Kmer content
 
 ### 4. Trimming the data
-We will use Trimmomatic version 0.39. More info at http://www.usadellab.org/cms/?page=trimmomatic
+We will use Trimmomatic version 0.39 to filter the sequences. More info at http://www.usadellab.org/cms/?page=trimmomatic
 
 Cleaning parameters have been chosen according to the results of the quality analysis : 
 
-- Removal of adaptaters:   ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 
+- Removal of adaptaters: ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 
 - LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+
+![](figs/Trimming.PNG){ width=50% }
 
 
 `~/mydatalocal/tp_nematode_2021/src/trimming_data.sh`
 
-The script procedes to an other quality analysis after trimming the data. 
+The script procedes to an other quality analysis (multiqc) after trimming the data. 
 
 ### 5. Transcript quantification
-Indexation and quantification made with Salmon.
+Indexation and quantification of transcripts using Salmon and its quasi-mapping technology.
 
-More info at https://salmon.readthedocs.io/en/latest/index.html
+More on Salmon: Patro, R., Duggal, G., Love, M. I., Irizarry, R. A., & Kingsford, C. (2017). Salmon provides fast and bias-aware quantification of transcript expression. Nature Methods.
 
 `~/mydatalocal/tp_nematode_2021/src/align_and_quantify.sh`
 
 The script procedes to an other quality analysis after mapping. 
 
-### 6. Differential expression analysis
-We use DSeq2 
-Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biology, 15:550. 10.1186/s13059-014-0550-8
+### 6. Differential Expression (DE) analysis
+To look for different expressed genes between WT and mutants, we used DESeq2 whi is based on a model using the negative binomial distribution.
+
+More on DESeq2: Love, M.I., Huber, W., Anders, S. (2014) Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biology, 15:550. 10.1186/s13059-014-0550-8
 
 `~/mydatalocal/tp_nematode_2021/src/dseq2_analysis.sh`
+
+Parameters: 
+- DESeq: "Wald"
 
 Differently regulated genes are defined after the following parameters:
 
 - Up-regulated: p-value adjusted < 0,05 and log2 of the FoldChange > 1
- => 13 genes
+ => 13 genes found for alg-5(tm1169) mutant
 - Down-regulated: p-value adjusted < 0,05 and log2 of the FoldChange < -1
- => 38 genes
+ => 38 genes found for alg-5(tm1169) mutant
 
 ### 7. Enrichment analyis
+
+Location and function of differentially expressed genes is analysed using the WormBase "Enrichment Analysis" tool:https://wormbase.org/tools/enrichment/tea/tea.cgi
+
 `~/mydatalocal/tp_nematode_2021/src/differential_analysis.R`
 
-Up-regulated genes in the mutants
+Results: 
+Up-regulated genes in the alg-5(tm1169) mutant 
 ![](figs/genes_of_interest_up.png){ width=50% }
 
-Down-regulated genes in the mutants
+Down-regulated genes in the alg-5(tm1169) mutant
 ![](figs/genes_of_interest_dw.png){ width=50% }
 
 
 ### 8. Evaluating the impact of development using RAPToR
-Estimation of the developmental age of all the samples and plot the results by strain.
-As the authors used young adult worms, we take the Cel_larv_YA reference transcriptome (from larva to adults)
+We used RAPTor to estimate the developmental time (which could differ from its chronological time) of the samples. We would then estimate the developmental impact of the alg mutations. 
+As the authors used young adult worms, we chose the Cel_larv_YA reference transcriptome which encompass stages from larva to adults.
+
+More on RAPToR:  Real age prediction from the transcriptome with RAPToR. Romain Bulteau, Mirko Francesconi
+bioRxiv 2021.09.07.459270; doi: https://doi.org/10.1101/2021.09.07.459270 
 
 `~/mydatalocal/tp_nematode_2021/src/RAPToR_analysis.R`
 
 ![](figs/estimated_ages.png)
+
+alg-5(tm1169) mutant worms present a small developmental defect when compared to WT worms.
+
+![](figs/developmental_impact.png)
+
 
 
