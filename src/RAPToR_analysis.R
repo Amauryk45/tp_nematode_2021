@@ -1,3 +1,6 @@
+
+#This script conduct a real age estimation and its comparison between samples using RAPToR
+
 #Installation
 #BiocManager::install("limma")
 #install.packages("pls")

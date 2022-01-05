@@ -1,3 +1,7 @@
+
+#This script uses conducts a gene enrichment analysis following the differential expression analysis with DESeq2
+
+
 library(DESeq2)
 library(tximport)
 ###Construction d'une liste des paths des résultats de quantification
@@ -36,7 +40,7 @@ res
 plot(x = res$log2FoldChange, y = -log10(res$padj), ylim = c(0,4)) #raw plot
 abline(v=c(-1, 1), col='red')
 abline(h=-log10(0.05), col='green')
-
+par(pty='s')
 plotMA(res, ylim = c(-12,12))  #nice plot
 
 plot(res$padj)

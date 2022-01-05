@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#This script uses 
+#This script uses DESeq2 to conduct a Differential Expression (DE) analysis
 
 cd ~/mydatalocal/tp_nematode_2021/
 
